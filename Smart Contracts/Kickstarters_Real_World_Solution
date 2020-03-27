@@ -1,0 +1,68 @@
+pragma solidity ^0.4.17;
+
+contract Campign{
+    
+    struct Request{
+        string description;
+        uint value;
+        address vendor;
+        bool complete;
+        uint approvelCount;
+        mapping(address=>bool) approvals;
+    }
+    
+    Request[] public requests;
+    address public manager;
+    uint public minimumAmount;
+    mapping(address=>bool) public approvers;
+    uint approversCount;
+    
+    modifier restricted (){
+        require(msg.sender==manager);
+        _;
+    }
+    
+    function Campign(uint minamount) public {
+        manager=msg.sender;
+        minimumAmount=minamount;
+    }
+    
+    function contributors() public payable {
+        require(msg.value>minimumAmount);
+        approvers[msg.sender]=true;
+        approversCount++;
+    }
+    
+    function createRequest(string description,uint value,address vendor) public restricted{
+        Request memory newRequest = Request({
+            description:description,
+            value:value,
+            vendor:vendor,
+            complete:false,
+            approvelCount:0
+        });
+        requests.push(newRequest);
+    }
+    
+    function approveRequest(uint index) public {
+        Request storage request=requests[index];
+        require(approvers[msg.sender]);
+        require(!request.complete);
+        
+        require(!request.approvals[msg.sender]);
+        
+        request.approvals[msg.sender]=true;
+        request.approvelCount++;
+    }
+    
+    function finalizeRequest(uint index) public restricted {
+        Request storage request=requests[index];
+        require(!request.complete);
+        require(request.approvelCount>approversCount);
+        
+        request.complete=true;
+        request.vendor.transfer(request.value);
+        
+    }
+    
+}
