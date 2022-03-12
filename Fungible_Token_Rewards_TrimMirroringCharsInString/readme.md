@@ -2,6 +2,9 @@
 
 Smart contracts are usually developed with remix code editor / truffle suite / hardhat. To check the smart contracts easily, the best option is remix editor as it doesn't require any framework setup and tools
 
+### Note:
+Usually most of the complex string manipulation are handled in the client side / off chain, complex string manipulation in smart contract will increase the gas and string manipulation is not recommended while creating an production level smart contracts.
+
 ## How to deploy and interact with smart contract
 
 1. Go to https://remix.ethereum.org/ website and create new folder as Fungible Token Contract
