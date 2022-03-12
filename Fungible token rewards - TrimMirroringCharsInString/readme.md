@@ -1,4 +1,4 @@
-### Read the instruction to deploy and interact with the smart contract
+# Read the instruction to deploy and interact with the smart contract
 
 ## How to deploy and interact with smart contract
 1. Go to https://remix.ethereum.org/ website and create new folder as Fungible Token Contract
