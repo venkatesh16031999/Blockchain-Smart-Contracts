@@ -1,5 +1,7 @@
 # Read the instruction to deploy and interact with the smart contract
 
+Smart contracts are usually developed with remix code editor / truffle suite / hardhat. To check the smart contracts easily, the best option is remix editor as it doesn't require any framework setup and tools
+
 ## How to deploy and interact with smart contract
 1. Go to https://remix.ethereum.org/ website and create new folder as Fungible Token Contract
 2. You can either use a multi file smart contracts / flattned smart contract to deploy and interact with it
